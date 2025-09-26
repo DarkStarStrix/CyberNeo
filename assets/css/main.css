@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700&display=swap');
+
+:root {
+    --bg-color: #0a0a14;
+    --panel-bg: rgba(26, 26, 46, 0.8);
+    --primary-glow: #00ffff;
+    --secondary-glow: #ff00ff;
+    --text-color: #e0e6ed;
+    --text-dim: #8892b0;
+    --border-color: #334155;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--border-color) 1px, transparent 1px),
+        linear-gradient(to right, var(--border-color) 1px, var(--bg-color) 1px);
+    background-size: 40px 40px;
+    color: var(--text-color);
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+.notification {
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.notification a {
+    color: var(--bg-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 2rem 1rem;
+}
+
+.pre {
+  margin-top: 0;
+}
+
+.quote {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin: 1.5rem 0 2rem 0;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Clean base (no animation until glitch-run added) */
+.ascii-title {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  line-height: 1.2;
+  margin: 0 0 32px;
+  white-space: pre;
+  color: var(--secondary-glow);
+  text-shadow:
+    0 0 4px #fff,
+    0 0 10px var(--secondary-glow),
+    0 0 18px var(--secondary-glow),
+    0 0 28px var(--secondary-glow),
+    0 0 42px var(--secondary-glow),
+    0 0 60px var(--secondary-glow);
+  filter: saturate(1.15);
+  position: relative;
+  /* Stabilize width */
+  display: inline-block;
+  user-select: text;
+  overflow: visible;
+}
+
+/* Glitch keyframes: 0-25% stable, 25-55% breakdown, 55-80% smooth rebuild, 80-100% stable */
+@keyframes cyberGlitch {
+  0%,25%,80%,100% { clip-path: inset(0 0 0 0); filter: saturate(1.15) brightness(1); }
+  /* Breakdown slices (abrupt) */
+  27% { clip-path: inset(82% 0 0 0); }
+  29% { clip-path: inset(0 0 78% 0); }
+  31% { clip-path: inset(38% 0 40% 0); }
+  33% { clip-path: inset(10% 0 60% 0); }
+  35% { clip-path: inset(65% 0 5% 0); }
+  37% { clip-path: inset(5% 0 85% 0); }
+  39% { clip-path: inset(50% 0 25% 0); }
+  41% { clip-path: inset(25% 0 50% 0); }
+  /* Rebuild (progressively filling back) */
+  55% { clip-path: inset(70% 0 0 0); }
+  58% { clip-path: inset(55% 0 0 0); }
+  61% { clip-path: inset(45% 0 0 0); }
+  64% { clip-path: inset(30% 0 0 0); }
+  67% { clip-path: inset(18% 0 0 0); }
+  70% { clip-path: inset(9% 0 0 0); }
+  73% { clip-path: inset(4% 0 0 0); }
+  76% { clip-path: inset(2% 0 0 0); }
+}
+
+/* Layered color ghosting only during glitch sequence */
+.ascii-title.glitch-run::before,
+.ascii-title.glitch-run::after {
+  content: attr(data-shadow);
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: pre;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+
+.ascii-title.glitch-run::before {
+  text-shadow: -2px 0 var(--color-accent-red);
+  animation: ghostRed 6s linear infinite;
+}
+
+.ascii-title.glitch-run::after {
+  text-shadow: 2px 0 var(--color-accent-blue), -2px 0 var(--color-accent-magenta);
+  animation: ghostBlue 6s linear infinite;
+}
+
+@keyframes ghostRed {
+  0%,25%,80%,100% { opacity: 0; transform: translate(0,0); }
+  28%,38% { opacity: .55; transform: translate(-1px,0); }
+  55%,76% { opacity: .35; transform: translate(-1px,0); }
+}
+
+@keyframes ghostBlue {
+  0%,25%,80%,100% { opacity: 0; transform: translate(0,0); }
+  30%,40% { opacity: .55; transform: translate(1px,0); }
+  55%,76% { opacity: .35; transform: translate(1px,0); }
+}
+
+.ascii-title.glitch-run {
+  /* duplicate text into pseudo elements by providing source */
+  animation: cyberGlitch 6s linear infinite;
+  /* Provide text for pseudo (keeps original intact) */
+}
+
+.ascii-title.glitch-run::before,
+.ascii-title.glitch-run::after {
+  content: attr(data-shadow);
+}
+
+/* JS will set data-shadow equal to innerText after injection */
+#ascii-art-container pre {
+  /* Ensure container styles consistent */
+}
+
+/* Optional: responsive scale */
+@media (max-width: 1200px) {
+  .ascii-title { font-size: 8px; }
+}
+@media (max-width: 820px) {
+  .ascii-title { font-size: 6px; }
+}
+@media (max-width: 600px) {
+  .ascii-title { font-size: 4.5px; }
+}
+
+.header {
+  margin: 2rem 1rem;
+}
+
+.header h1 {
+  font-size: 1.2em;
+  max-width: 40ch;
+  margin: 0 auto;
+  color: #c0c0c0;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.nav {
+  margin: 2rem 1rem 0;
+}
+
+.nav__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button {
+    background-color: transparent;
+    border: 2px solid var(--primary-glow);
+    color: var(--primary-glow);
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--primary-glow);
+    color: var(--bg-color);
+}
+
+.button svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Main Content Styling */
+.main-content {
+    padding-top: 2rem;
+}
+
+.content-panel {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(5px);
+}
+
+.content-panel h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--primary-glow);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.content-panel p, .content-panel li {
+    color: var(--text-dim);
+}
+
+.content-panel strong {
+    color: var(--text-color);
+}
+
+.content-panel ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.content-panel li {
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.content-panel li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--primary-glow);
+}
+
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+.faq-panel {
+    margin-top: 2.5rem;
+}
+
+.faq-list {
+    margin: 0;
+    padding: 0;
+}
+
+.faq-list dt {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--primary-glow);
+    margin-top: 1.2em;
+    margin-bottom: 0.3em;
+    font-weight: bold;
+}
+
+.faq-list dd {
+    margin: 0 0 1em 1.5em;
+    color: var(--text-dim);
+    font-size: 1em;
+    line-height: 1.6;
+}
