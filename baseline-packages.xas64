@@ -1,0 +1,63 @@
+# Duplicate of baseline-packages.x86_64 to match the spec's filename
+# Prefer using baseline-packages.x86_64; this file exists for convenience.
+
+# Core
+base
+linux
+linux-firmware
+git
+vim
+tmux
+sudo
+htop
+bash-completion
+wget
+curl
+
+# Networking
+networkmanager
+openssh
+nm-connection-editor
+
+# GUI / Wayland compositor + tools
+hyprland
+waybar
+wl-clipboard
+grim
+slurp
+swaybg
+alacritty
+
+# Optional Xorg bits
+xorg
+xorg-xinit
+
+# Utilities
+fzf
+ripgrep
+bat
+exa
+
+# Dev & CI/CD
+python
+python-pip
+docker
+docker-compose
+nodejs
+npm
+git-lfs
+make
+gcc
+
+# ML/AI
+cuda
+cudnn
+pytorch
+tensorflow
+
+# Fonts & Aesthetics
+ttf-jetbrains-mono
+ttf-fira-code
+noto-fonts
+papirus-icon-theme
+pavucontrol

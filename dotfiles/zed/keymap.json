@@ -1,0 +1,4 @@
+[
+  { "context": "Global", "bindings": { "ctrl-k ctrl-s": "application:open-settings" } },
+  { "context": "Editor", "bindings": { "ctrl-\\\\": "editor:toggle-sidebar" } }
+]

@@ -1,120 +1,82 @@
 # CyberNEO
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Arch Linux](https://img.shields.io/badge/distro-Arch-blue.svg)](https://archlinux.org/) [![Release](https://img.shields.io/github/v/release/DarkStarStrix/CyberNeo)](https://github.com/DarkStarStrix/CyberNeo/releases)
+CyberNEO is a lean, cyberpunk-flavored Arch setup using Hyprland, Waybar, and a pre-wired dev/ML stack. This repo contains baseline package lists, starter dotfiles, and a first-boot script to bootstrap a fresh install or ISO profile.
 
-CyberNEO is a custom Arch-based Linux distribution tailored for developers, machine learning engineers, and hackers seeking a fast, minimal, and stylish operating system.
+## What’s inside
 
-## Table of Contents
+- baseline-packages.x86_64 and baseline-packages.xas64 (spec name) — package set for Arch/pacman
+- dotfiles/
+  - hyperland/ (Hyprland config → installs to ~/.config/hypr)
+  - hypr/ (same as above, for compatibility)
+  - waybar/ (config + style)
+  - nvim/ (Lazy.nvim bootstrap + sane defaults)
+  - tmux/ (.tmux.conf)
+  - zed/ (settings + keymap)
+  - .xinitrc (exec Hyprland)
+- scripts/firstboot.sh — applies dotfiles and preloads ML docker images
+- assets/
+  - wallpapers/ — drop images here
+  - fonts/ — optional custom fonts
 
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-  - [Download ISO](#download-iso)
-  - [Virtual Machine](#virtual-machine)
-  - [Bare Metal](#bare-metal)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Customization](#customization)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+## Quickstart (on Arch)
 
-## Features
+1) Install baseline packages
 
-- Fast, Arch-based minimal installation
-- Pre-configured development environment
-  - Python, Node.js, Rust, Go toolchains
-  - GPU acceleration support (CUDA, ROCm)
-- Lightweight window manager (i3wm) with custom themes
-- Zsh with Oh My Zsh and useful plugins
-- Tmux configured for productivity
-- Custom scripts for system maintenance and updates
-- Stylish terminal (Powerlevel10k prompt, icons)
+Save this repo locally, then:
 
-## Requirements
+```bash
+sudo pacman -Syu --needed - < baseline-packages.x86_64
+```
 
-- x86_64 architecture
-- Minimum 2 GB RAM (4 GB recommended)
-- 20 GB free disk space
-- UEFI/BIOS with virtualization support (optional)
+2) Copy dotfiles for your user
 
-## Installation
+```bash
+mkdir -p ~/.config
+cp -r dotfiles/nvim ~/.config/
+cp -r dotfiles/waybar ~/.config/
+# Prefer the spec folder name
+mkdir -p ~/.config/hypr
+cp -r dotfiles/hyperland/* ~/.config/hypr/
+# Optional: tmux + zed
+cp dotfiles/tmux/.tmux.conf ~/
+mkdir -p ~/.config/zed && cp -r dotfiles/zed/* ~/.config/zed/
+# Optional: startx support for Hyprland
+cp dotfiles/.xinitrc ~/
+```
 
-### Download ISO
+3) First boot helper (optional)
 
-1. Visit the [Releases](https://github.com/DarkStarStrix/CyberNeo/releases) page.
-2. Download the latest `.iso` file.
-3. Verify the checksum:
-   ```bash
-   sha256sum CyberNEO-<version>.iso
-   # Compare with published checksum
-   ```
+```bash
+chmod +x scripts/firstboot.sh
+./scripts/firstboot.sh
+```
 
-### Virtual Machine
+4) Start Hyprland
 
-1. Create a new VM with 2 CPU cores and 4 GB RAM.
-2. Attach the downloaded ISO as the boot medium.
-3. Boot the VM and follow the guided installer.
+```bash
+startx
+# ~/.xinitrc runs: exec Hyprland
+```
 
-### Bare Metal
+## Notes
 
-1. Create a bootable USB:
-   ```bash
-   sudo dd if=CyberNEO-<version>.iso of=/dev/sdX bs=4M status=progress && sync
-   ```
-2. Boot from the USB drive.
-3. Follow the on-screen installer prompts.
+- Alacritty is the default terminal in the Hyprland config.
+- Waybar will auto-start; wallpapers are picked from ~/Pictures/Wallpapers if present.
+- Lazy.nvim is bootstrapped on first Neovim run; we keep it minimal so you can layer plugins.
+- Docker service is enabled by the script; you may need to log out/in for docker group membership.
 
-## Usage
+## ISO build (releng profile)
 
-- Log in with the default user `neo` (password: `cyberneo`).
-- Update the system:
-  ```bash
-  sudo pacman -Syu
-  ```
-- Launch the window manager:
-  ```bash
-  startx
-  ```
-
-## Configuration
-
-- Edit `~/.config/i3/config` to customize keybindings and layouts.
-- Themes and colors are in `~/.config/polybar/` and `~/.config/rofi/`.
-- Zsh aliases are in `~/.zshrc`.
-
-## Customization
-
-- Add your favorite dotfiles or install additional software with `pacman`.
-- Enable AUR support with an AUR helper (e.g., `yay`).
+- Replace the releng packages list with this repo’s baseline-packages.x86_64 (or xas64 per spec).
+- Place dotfiles under airootfs (e.g., /airootfs/root/dotfiles) and include scripts/firstboot.sh.
+- Run the ArchISO build script (see Spec.md for steps).
 
 ## Troubleshooting
 
-- For network issues, check `systemctl status NetworkManager`.
-- For graphics problems, see `/var/log/Xorg.0.log`.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/my-feature`.
-3. Commit your changes: `git commit -m "Add my feature"`.
-4. Push to your branch: `git push origin feature/my-feature`.
-5. Open a pull request.
-
-Please ensure your code follows the existing style and includes documentation where necessary.
+- No wallpaper? Put files under assets/wallpapers/ before running the script.
+- Waybar JSON: this repo uses config.jsonc (comments allowed). If your waybar doesn’t support jsonc, remove comments or rename to config.
+- Zed JSON: settings/keymaps are plain JSON (no comments).
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Arch Linux
-- i3 Window Manager
-- Oh My Zsh
-- Powerlevel10k
-- Polybar
-
+MIT. See LICENSE.

@@ -189,7 +189,7 @@ git clone https://github.com/craftyourdotfiles/LazyVim.git ~/.config/nvim
 
 ### Zed
 
-* Download latest release
+* Download the latest release
 * Place configs under `dotfiles/zed/`
 
 ### Tmux

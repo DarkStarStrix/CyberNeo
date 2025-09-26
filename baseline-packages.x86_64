@@ -1,0 +1,65 @@
+# CyberNEO baseline package set for Arch ISO build
+# Comments are allowed; pacman will ignore them when using: pacman -Syu --needed - < baseline-packages.x86_64
+
+# Core
+base
+linux
+linux-firmware
+git
+vim
+tmux
+sudo
+htop
+bash-completion
+wget
+curl
+
+# Networking
+networkmanager
+openssh
+nm-connection-editor
+
+# GUI / Wayland compositor + tools
+# Note: upstream project is Hyprland (spelled with 'y'). The binary is 'Hyprland'.
+hyprland
+waybar
+wl-clipboard
+grim
+slurp
+swaybg
+alacritty
+
+# Optional Xorg bits (useful for tools)
+xorg
+xorg-xinit
+
+# Utilities
+fzf
+ripgrep
+bat
+exa
+
+# Dev & CI/CD
+python
+python-pip
+docker
+docker-compose
+nodejs
+npm
+git-lfs
+make
+gcc
+
+# ML/AI
+cuda
+cudnn
+pytorch
+tensorflow
+
+# Fonts & Aesthetics
+ttf-jetbrains-mono
+ttf-fira-code
+noto-fonts
+papirus-icon-theme
+pavucontrol
+
