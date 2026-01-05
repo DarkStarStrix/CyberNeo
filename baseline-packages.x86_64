@@ -1,15 +1,16 @@
-# CyberNEO baseline package set for Arch ISO build
-# Comments are allowed; pacman will ignore them when using: pacman -Syu --needed - < baseline-packages.x86_64
+# CyberNEO minimal profile (advanced users who want full control)
+# pacman -Syu --needed - < baseline-packages.x86_64
+# For a fuller setup, use baseline-packages.full.x86_64
 
 # Core
 base
+base-devel
 linux
 linux-firmware
 git
-vim
+neovim
 tmux
 sudo
-htop
 bash-completion
 wget
 curl
@@ -17,7 +18,6 @@ curl
 # Networking
 networkmanager
 openssh
-nm-connection-editor
 
 # GUI / Wayland compositor + tools
 # Note: upstream project is Hyprland (spelled with 'y'). The binary is 'Hyprland'.
@@ -29,37 +29,30 @@ slurp
 swaybg
 alacritty
 
-# Optional Xorg bits (useful for tools)
-xorg
-xorg-xinit
-
 # Utilities
+fd
 fzf
 ripgrep
 bat
-exa
+eza
+htop
 
 # Dev & CI/CD
 python
 python-pip
 docker
-docker-compose
-nodejs
-npm
-git-lfs
-make
-gcc
+polkit
+lxqt-policykit
 
 # ML/AI
 cuda
 cudnn
 pytorch
 tensorflow
+uv
 
 # Fonts & Aesthetics
 ttf-jetbrains-mono
-ttf-fira-code
 noto-fonts
-papirus-icon-theme
-pavucontrol
-
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono

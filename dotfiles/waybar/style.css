@@ -1,6 +1,6 @@
 /* CyberNEO Waybar style - neon vibes */
 * {
-  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-family: "Symbols Nerd Font", "Symbols Nerd Font Mono", "JetBrains Mono", "Fira Code", monospace;
   font-size: 12px;
 }
 window#waybar {
@@ -19,4 +19,3 @@ window#waybar {
 #clock, #cpu, #memory, #network, #battery, #tray, #window {
   margin: 0 8px;
 }
-

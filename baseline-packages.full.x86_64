@@ -1,6 +1,5 @@
-# CyberNEO minimal profile (advanced users who want full control)
-# pacman -Syu --needed - < baseline-packages.xas64
-# For a fuller setup, use baseline-packages.full.xas64
+# CyberNEO full profile (accessible, still opinionated)
+# pacman -Syu --needed - < baseline-packages.full.x86_64
 
 # Core
 base
@@ -18,8 +17,10 @@ curl
 # Networking
 networkmanager
 openssh
+nm-connection-editor
 
 # GUI / Wayland compositor + tools
+# Note: upstream project is Hyprland (spelled with 'y'). The binary is 'Hyprland'.
 hyprland
 waybar
 wl-clipboard
@@ -27,6 +28,7 @@ grim
 slurp
 swaybg
 alacritty
+xorg-xwayland
 
 # Utilities
 fd
@@ -40,8 +42,14 @@ htop
 python
 python-pip
 docker
+docker-compose
+git-lfs
+nodejs
+npm
 polkit
 lxqt-policykit
+zsh
+starship
 
 # ML/AI
 cuda
@@ -50,8 +58,19 @@ pytorch
 tensorflow
 uv
 
-# Fonts & Aesthetics
-ttf-jetbrains-mono
+# Audio + storage helpers
+pipewire
+pipewire-pulse
+wireplumber
+pavucontrol
+gvfs
+thunar
+
+# Browser
+firefox
+
+# Fonts
 noto-fonts
+ttf-jetbrains-mono
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono

@@ -1,6 +1,8 @@
 # CyberNEO v0.1 – Build Specification
 
-CyberNEO is a lean, opinionated, cyberpunk-inspired OS built on Arch Linux with Hyperland, pre-configured developer tooling, and a streamlined ML/AI stack. This spec describes the full technical build process from scratch to ISO.
+Status: active development (first public version). Expect sharp edges.
+
+CyberNEO is a lean, opinionated, cyberpunk-inspired OS built on Arch Linux with Hyprland, pre-configured developer tooling, and a streamlined ML/AI stack. This spec describes the full technical build process from scratch to ISO.
 
 ---
 
@@ -25,7 +27,7 @@ CyberNEO is a lean, opinionated, cyberpunk-inspired OS built on Arch Linux with 
 cyberneo-configs/
 ├── baseline-packages.xas64
 ├── dotfiles/
-│   ├── hyperland/
+│   ├── hyperland/ (Hyprland config)
 │   ├── tmux/
 │   ├── nvim/
 │   └── zed/
@@ -93,88 +95,39 @@ cyberneo-configs/
 
 ## Layer 3: Baseline Packages
 
-Create `baseline-packages.xas64`:
+Create a profile list:
 
-```text
-# Core
-base
-linux
-linux-firmware
-git
-vim
-tmux
-sudo
-htop
-bash-completion
-wget
-curl
+- Minimal (advanced): `baseline-packages.xas64`
+- Full (accessible): `baseline-packages.full.xas64`
 
-# Networking
-networkmanager
-openssh
+The profile files are the source of truth for package lists. In short:
 
-# GUI
-xorg
-xorg-xinit
-hyperland
-waybar
-wl-clipboard
-grim
-slurp
-swaybg
-
-# Utilities
-fzf
-ripgrep
-bat
-exa
-
-# Dev & CI/CD
-python
-python-pip
-docker
-docker-compose
-nodejs
-npm
-git-lfs
-make
-gcc
-
-# ML/AI
-cuda
-cudnn
-pytorch
-tensorflow
-uv
-
-# Fonts & Aesthetics
-ttf-jetbrains-mono
-ttf-fira-code
-noto-fonts
-papirus-icon-theme
-```
+- Minimal: Arch base, Hyprland + Waybar, CLI essentials, and the ML stack.
+- Full: Minimal plus audio, XWayland, file manager, browser, and shell polish.
 
 Install:
 
 ```bash
 pacman -Syu --needed - < baseline-packages.xas64
+# or
+pacman -Syu --needed - < baseline-packages.full.xas64
 ```
 
 ---
 
-## Layer 4: Hyperland + GUI Config
+## Layer 4: Hyprland + GUI Config
 
-1. Install Hyperland:
+1. Install Hyprland:
 
    ```bash
-   pacman -S hyperland swaybg waybar wl-clipboard grim slurp
+   pacman -S hyprland swaybg waybar wl-clipboard grim slurp
    ```
 2. Xinit:
 
    ```bash
-   echo "exec Hyperland" > ~/.xinitrc
+   echo "exec Hyprland" > ~/.xinitrc
    ```
-3. Configure `~/.config/hyperland/config` (tiling, keybinds, neon theme).
+3. Configure `~/.config/hypr/hyprland.conf` (tiling, keybinds, neon theme).
 4. Add wallpapers to `~/assets/wallpapers/`.
 
 ---
@@ -303,7 +256,7 @@ chmod +x ~/scripts/firstboot.sh
 * Boot ISO in VM/USB
 * Verify:
 
-  * Hyperland loads correctly
+  * Hyprland loads correctly
   * Tmux sessions work
   * NeoVim + Zed configs functional
   * CUDA + PyTorch/TensorFlow detect GPU

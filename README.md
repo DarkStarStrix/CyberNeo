@@ -20,12 +20,19 @@ CyberNEO is a lean, cyberpunk-flavored Arch setup using Hyprland, Waybar, and a 
 
 ## Quickstart (on Arch)
 
-1) Install baseline packages
+Pick a profile:
+
+- Minimal (advanced users): `baseline-packages.x86_64`
+- Full (accessible, still opinionated): `baseline-packages.full.x86_64`
+
+1) Install packages
 
 Save this repo locally, then:
 
 ```bash
 sudo pacman -Syu --needed - < baseline-packages.x86_64
+# or
+sudo pacman -Syu --needed - < baseline-packages.full.x86_64
 ```
 
 2) Copy dotfiles for your user
@@ -58,12 +65,30 @@ startx
 # ~/.xinitrc runs: exec Hyprland
 ```
 
+## CLI worker
+
+Use the simple CLI helper to install packages or copy dotfiles:
+
+```bash
+./scripts/cyberneo-cli.sh minimal install
+./scripts/cyberneo-cli.sh full install
+./scripts/cyberneo-cli.sh minimal dotfiles
+```
+
 ## Notes
 
 - Alacritty is the default terminal in the Hyprland config.
 - Waybar will auto-start; wallpapers are picked from ~/Pictures/Wallpapers if present.
+- A minimal polkit agent (`lxqt-policykit-agent`) is started by Hyprland for auth prompts.
 - Lazy.nvim is bootstrapped on first Neovim run; we keep it minimal so you can layer plugins.
 - Docker service is enabled by the script; you may need to log out/in for docker group membership.
+
+## Website
+
+- `index.html` is the main landing page (mirrored in `CyberNeo_Hero.html`).
+- Local preview: run `python3 -m http.server 5173` from the repo root and open `http://localhost:5173/`.
+- Hosting: for GitHub Pages, deploy from the repo root or move `index.html` plus `assets/` into a `docs/` folder.
+- Quickstart: see `docs/GETTING_STARTED.md`.
 
 ## ISO build (releng profile)
 
